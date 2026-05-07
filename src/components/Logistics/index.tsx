@@ -50,7 +50,7 @@ export default function Logistics() {
               transition={{ delay: i * 0.1 }}
               className="bg-card border border-border rounded-3xl p-8 hover:shadow-xl transition-all hover:-translate-y-2 group"
             >
-              <div className="size-14 rounded-2xl icon-container-base mb-6 group-hover:bg-primary group-hover:scale-110 transition-all">
+              <div className="size-14 rounded-2xl icon-container-base mb-6 group-hover:bg-primary group-hover:text-background group-hover:scale-110 transition-all">
                 {iconMap[point.id]}
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-3">

@@ -13,8 +13,7 @@ export default function WhatsAppButton() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const phoneNumber = siteData.contact.phone.replace(/\D/g, "");
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hola, me gustaría cotizar productos con LSol Comercializadora Internacional.")}`;
+  const whatsappUrl = siteData.contact.whatsapp || `https://wa.me/${siteData.contact.phone.replace(/\D/g, "")}?text=${encodeURIComponent("Hola, me gustaría cotizar productos con LSol Comercializadora Internacional.")}`;
 
   if (!visible) return null;
 
@@ -24,10 +23,10 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all hover:scale-110 flex items-center gap-2"
-      aria-label="Contactar por WhatsApp"
+      aria-label="Contactar por WhatsApp - Ventas / Cotizaciones"
     >
       <MessageCircle className="size-6" />
-      <span className="hidden sm:inline text-sm font-medium">WhatsApp</span>
+      <span className="hidden sm:inline text-sm font-medium">Cotizar</span>
     </a>
   );
 }

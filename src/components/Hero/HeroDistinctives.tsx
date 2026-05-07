@@ -20,7 +20,7 @@ export default function HeroDistinctives() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.15, duration: 0.5 }}
+            transition={{ delay: i * 0.2, duration: 0.5 }}
             className="flex flex-col items-center text-center p-6"
           >
             <div className="size-14 rounded-2xl icon-container-base mb-4">

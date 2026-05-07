@@ -13,11 +13,28 @@ export default function Contact() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    setFormState({ name: "", email: "", message: "" });
-    setTimeout(() => setSubmitted(false), 4000);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.mailtoLink) {
+          window.location.href = data.mailtoLink;
+        }
+        setFormState({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitted(false), 4000);
+      }
+    } catch {
+      setSubmitted(false);
+    }
   };
 
   return (
@@ -121,11 +138,11 @@ export default function Contact() {
             </form>
 
             <div className="space-y-6">
-              {([
-                { icon: Mail, value: contact.email, href: `mailto:${contact.email}` },
-                { icon: Phone, value: contact.phone, href: `tel:${contact.phone}` },
-                { icon: MapPin, value: contact.address, href: undefined },
-              ] as const).map((item, i) => {
+               {[
+                 { icon: Mail, value: contact.email, href: `mailto:${contact.email}` },
+                 { icon: Phone, value: contact.phone, href: `tel:${contact.phone}` },
+                 { icon: MapPin, value: contact.address, href: undefined },
+               ].map((item, i) => {
                 const Icon = item.icon;
                 const content = (
                   <>

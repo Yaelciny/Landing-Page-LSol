@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono, Sora } from "next/font/google";
 import "./globals.css";
 
@@ -17,12 +16,6 @@ const sora = Sora({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
 });
-
-export const metadata: Metadata = {
-  title: "LSol Comercializadora Internacional",
-  description:
-    "Suministro estratégico de materias primas e insumos químicos para la industria. Importación y distribución con respaldo global.",
-};
 
 export default function RootLayout({
   children,
