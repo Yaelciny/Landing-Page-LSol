@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { siteData } from "@/data/data";
+import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -22,58 +24,105 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-sm border-b border-zinc-200">
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        <a href="#inicio" className="text-xl font-bold text-black tracking-tight">
-          {siteData.siteName.split(" ")[0]}
-        </a>
-
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNav(link.href)}
-              className="text-sm text-zinc-600 hover:text-black transition-colors"
+    <>
+      <motion.header
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border"
+      >
+        <div className="container">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            <motion.a
+              href="#inicio"
+              className="text-2xl font-bold text-foreground font-sora"
             >
-              {link.label}
-            </button>
-          ))}
-          <button
-            onClick={() => handleNav("#contacto")}
-            className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-5 py-2 rounded-md transition-colors"
-          >
-            Cotizar ahora
-          </button>
+              <span className="text-gradient">
+                {siteData.siteName.split(" ")[0]}
+              </span>
+            </motion.a>
+
+            <nav className="hidden lg:flex items-center gap-8">
+              {navLinks.map((item, index) => (
+                <motion.button
+                  key={item.href}
+                  onClick={() => handleNav(item.href)}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                </motion.button>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-4">
+              <Button
+                variant="default"
+                className="hidden lg:flex"
+                onClick={() => handleNav("#contacto")}
+              >
+                Cotizar ahora
+              </Button>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setOpen(!open)}
+              >
+                {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              </Button>
+            </div>
+          </div>
         </div>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden p-2 text-black"
-          aria-label="Abrir menú"
-        >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {open && (
-        <div className="md:hidden bg-white border-t border-zinc-200 px-6 py-4 space-y-3">
-          {navLinks.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNav(link.href)}
-              className="block w-full text-left text-zinc-600 hover:text-black py-2 transition-colors"
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden bg-card border-t border-border overflow-hidden"
             >
-              {link.label}
-            </button>
-          ))}
-          <button
-            onClick={() => handleNav("#contacto")}
-            className="w-full bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-5 py-2 rounded-md transition-colors"
-          >
-            Cotizar ahora
-          </button>
-        </div>
-      )}
-    </nav>
+              <nav className="container px-4 py-4 flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.href}
+                    onClick={() => handleNav(link.href)}
+                    className="py-3 px-4 text-foreground hover:bg-muted rounded-lg transition-colors text-left"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+                <Button
+                  variant="default"
+                  className="mt-2 w-full"
+                  onClick={() => handleNav("#contacto")}
+                >
+                  Cotizar ahora
+                </Button>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
+            style={{ top: "64px" }}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 }

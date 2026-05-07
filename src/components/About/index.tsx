@@ -7,16 +7,18 @@ export default function About() {
   const about = siteData.about;
 
   return (
-    <section id="sobre-nosotros" className="bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.h2
+    <section id="sobre-nosotros" className="section-padding bg-background scroll-mt-24">
+      <div className="container">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-black text-center mb-16"
+          className="section-header-wrapper"
         >
-          Sobre Nosotros
-        </motion.h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+            Sobre Nosotros
+          </h2>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <motion.div
@@ -26,13 +28,21 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div>
-              <h3 className="text-xl font-semibold text-black mb-3">Quiénes Somos</h3>
-              <p className="text-zinc-600 leading-relaxed">{about.concept}</p>
+            <div className="bg-card border border-border rounded-3xl p-8 hover:shadow-lg transition-all group">
+              <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                Quiénes Somos
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {about.concept}
+              </p>
             </div>
-            <div>
-              <h3 className="text-xl font-semibold text-black mb-3">Nuestra Misión</h3>
-              <p className="text-zinc-600 leading-relaxed">{about.mission}</p>
+            <div className="bg-card border border-border rounded-3xl p-8 hover:shadow-lg transition-all group">
+              <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                Nuestra Misión
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {about.mission}
+              </p>
             </div>
           </motion.div>
 
@@ -43,13 +53,21 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div>
-              <h3 className="text-xl font-semibold text-black mb-3">Trayectoria</h3>
-              <p className="text-zinc-600 leading-relaxed">{about.trajectory}</p>
+            <div className="bg-card border border-border rounded-3xl p-8 hover:shadow-lg transition-all group">
+              <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                Trayectoria
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {about.trajectory}
+              </p>
             </div>
-            <div>
-              <h3 className="text-xl font-semibold text-black mb-3">Valor Agregado</h3>
-              <p className="text-zinc-600 leading-relaxed">{about.valueAdd}</p>
+            <div className="bg-card border border-border rounded-3xl p-8 hover:shadow-lg transition-all group">
+              <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                Valor Agregado
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {about.valueAdd}
+              </p>
             </div>
           </motion.div>
         </div>

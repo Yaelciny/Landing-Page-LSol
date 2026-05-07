@@ -4,6 +4,9 @@ import { siteData } from "@/data/data";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Contact() {
   const contact = siteData.contact;
@@ -18,101 +21,144 @@ export default function Contact() {
   };
 
   return (
-    <section id="contacto" className="bg-zinc-50 py-20">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.h2
+    <section id="contacto" className="section-padding bg-muted/30 scroll-mt-24">
+      <div className="container">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-black text-center mb-16"
+          className="section-header-wrapper"
         >
-          Contacto
-        </motion.h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+            Contacto
+          </h2>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="bg-white border border-zinc-200 rounded-lg p-8">
-              <h3 className="text-xl font-semibold text-black mb-6">Envíenos un mensaje</h3>
+            <form
+              onSubmit={handleSubmit}
+              className="bg-card rounded-3xl p-8 border border-border shadow-lg"
+            >
               {submitted && (
-                <div className="mb-4 p-3 bg-green-50 border border-green-200 text-green-700 rounded text-sm">
+                <div className="mb-4 p-3 bg-green-50 dark:bg-green-950 border border-green-200 text-green-700 rounded-lg text-sm">
                   Mensaje enviado correctamente. Nos pondremos en contacto pronto.
                 </div>
               )}
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-zinc-700 mb-1">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     Nombre
                   </label>
-                  <input
+                  <Input
                     id="name"
                     type="text"
                     required
                     value={formState.name}
-                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    className="w-full px-4 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-black"
+                    onChange={(e) =>
+                      setFormState({ ...formState, name: e.target.value })
+                    }
+                    className="h-12 rounded-xl bg-muted/50 border-border"
                     placeholder="Su nombre completo"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-zinc-700 mb-1">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     Correo electrónico
                   </label>
-                  <input
+                  <Input
                     id="email"
                     type="email"
                     required
                     value={formState.email}
-                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                    className="w-full px-4 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-black"
+                    onChange={(e) =>
+                      setFormState({ ...formState, email: e.target.value })
+                    }
+                    className="h-12 rounded-xl bg-muted/50 border-border"
                     placeholder="correo@empresa.com"
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-zinc-700 mb-1">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     Mensaje
                   </label>
-                  <textarea
+                  <Textarea
                     id="message"
                     required
                     rows={4}
                     value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    className="w-full px-4 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-black resize-none"
+                    onChange={(e) =>
+                      setFormState({ ...formState, message: e.target.value })
+                    }
+                    className="rounded-xl bg-muted/50 border-border resize-none"
                     placeholder="Describa su requerimiento..."
                   />
                 </div>
-                <button
+                <Button
                   type="submit"
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-md transition-colors flex items-center justify-center gap-2"
+                  variant="default"
+                  size="lg"
+                  className="w-full gap-2"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="size-4" />
                   Cotizar ahora
-                </button>
-              </form>
-            </div>
+                </Button>
+              </div>
+            </form>
 
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-red-600 flex-shrink-0" />
-                <a href={`mailto:${contact.email}`} className="text-zinc-700 hover:text-black">
-                  {contact.email}
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-red-600 flex-shrink-0" />
-                <a href={`tel:${contact.phone}`} className="text-zinc-700 hover:text-black">
-                  {contact.phone}
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-red-600 flex-shrink-0" />
-                <span className="text-zinc-700">{contact.address}</span>
-              </div>
+            <div className="space-y-6">
+              {([
+                { icon: Mail, value: contact.email, href: `mailto:${contact.email}` },
+                { icon: Phone, value: contact.phone, href: `tel:${contact.phone}` },
+                { icon: MapPin, value: contact.address, href: undefined },
+              ] as const).map((item, i) => {
+                const Icon = item.icon;
+                const content = (
+                  <>
+                    <div className="size-12 rounded-xl icon-container-base">
+                      <Icon className="size-5" />
+                    </div>
+                    <span className="text-foreground font-medium">
+                      {item.value}
+                    </span>
+                  </>
+                );
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-center gap-4"
+                  >
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        className="flex items-center gap-4 hover:opacity-80 transition-opacity"
+                      >
+                        {content}
+                      </a>
+                    ) : (
+                      content
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
 
@@ -120,13 +166,13 @@ export default function Contact() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="rounded-lg overflow-hidden border border-zinc-200 min-h-[400px]"
+            className="rounded-3xl overflow-hidden border border-border shadow-lg"
           >
             <iframe
               src={contact.mapUrl}
               width="100%"
               height="100%"
-              style={{ border: 0, minHeight: "400px" }}
+              style={{ border: 0, minHeight: "400px", width: "100%" }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

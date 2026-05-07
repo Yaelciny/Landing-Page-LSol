@@ -11,16 +11,18 @@ export default function Hero() {
     <>
       <HeroCarousel />
       <HeroDistinctives />
-      <section className="bg-zinc-50 py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.h2
+      <section className="section-padding bg-muted/30">
+        <div className="container">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-black text-center mb-12"
+            className="section-header-wrapper"
           >
-            Experiencia, Calidad y Confianza en Suministros
-          </motion.h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+              Experiencia, Calidad y Confianza en Suministros
+            </h2>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {siteData.features.map((feature, i) => (
               <motion.div
@@ -29,10 +31,12 @@ export default function Hero() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.4 }}
-                className="flex items-start gap-3 p-4 bg-white border border-zinc-200 rounded-lg"
+                className="flex items-start gap-3 p-6 bg-card border border-border rounded-2xl hover:shadow-lg transition-all hover:-translate-y-1 group"
               >
-                <Check className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
-                <p className="text-zinc-700">{feature.text}</p>
+                <div className="size-10 rounded-xl icon-container-base flex-shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all">
+                  <Check className="size-5 group-hover:text-primary-foreground transition-colors" />
+                </div>
+                <p className="text-muted-foreground">{feature.text}</p>
               </motion.div>
             ))}
           </div>

@@ -5,15 +5,15 @@ import { motion } from "framer-motion";
 import { Shield, Zap, Award } from "lucide-react";
 
 const iconMap: Record<number, React.ReactNode> = {
-  1: <Shield className="w-8 h-8" />,
-  2: <Zap className="w-8 h-8" />,
-  3: <Award className="w-8 h-8" />,
+  1: <Shield className="size-7" />,
+  2: <Zap className="size-7" />,
+  3: <Award className="size-7" />,
 };
 
 export default function HeroDistinctives() {
   return (
-    <section className="bg-white border-b border-zinc-200">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="bg-background border-b border-border">
+      <div className="container py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
         {siteData.distinctives.map((item, i) => (
           <motion.div
             key={item.id}
@@ -23,9 +23,13 @@ export default function HeroDistinctives() {
             transition={{ delay: i * 0.15, duration: 0.5 }}
             className="flex flex-col items-center text-center p-6"
           >
-            <div className="text-red-600 mb-4">{iconMap[item.id]}</div>
-            <h3 className="text-xl font-semibold text-black mb-2">{item.title}</h3>
-            <p className="text-zinc-600">{item.description}</p>
+            <div className="size-14 rounded-2xl icon-container-base mb-4">
+              {iconMap[item.id]}
+            </div>
+            <h3 className="text-xl font-semibold text-foreground mb-2">
+              {item.title}
+            </h3>
+            <p className="text-muted-foreground">{item.description}</p>
           </motion.div>
         ))}
       </div>
