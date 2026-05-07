@@ -42,7 +42,7 @@ export default function HeroCarousel() {
           initial={{ opacity: 0 }}  // Empieza invisible
           animate={{ opacity: 1 }}  // Se vuelve visible
           exit={{ opacity: 0 }}    // Se desvanece al salir
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.5 }}
           className="absolute inset-0"
         >
           <Image
@@ -63,10 +63,10 @@ export default function HeroCarousel() {
             key={current}  // Re-renderiza animacion al cambiar banner
             initial={{ opacity: 0, y: 30 }}  // Empieza abajo e invisible
             animate={{ opacity: 1, y: 0 }}  // Termina arriba y visible
-            transition={{ duration: 0.7 }}
+            transition={{ delay: 0.5, duration: 0.7 }}
             className="text-center max-w-5xl mx-auto px-6"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
               {banners[current].title}
             </h1>
             <p className="text-xl md:text-2xl text-zinc-200 max-w-3xl mx-auto mb-8">

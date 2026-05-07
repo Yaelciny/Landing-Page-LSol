@@ -287,7 +287,7 @@ export const siteData: SiteData = {
     phone: "477 123 45 56",
     address: "Hey Hey Studio blvd",
     mapUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12096.288981944748!2d-99.133208!3d19.432608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x789c79fe9f16b7e2!2sZocalo%2C%20Mexico%20City!5e0!3m2!1sen!2smx!4v1234567890",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14884.797727549842!2d-101.68172928488534!3d21.14446021083814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbd8cc3628643%3A0x7097d5194b2586a8!2sHey%20Hey%20Studio%20-%20Agencia%20de%20Marketing%20Digital%20en%20Le%C3%B3n.!5e0!3m2!1ses-419!2smx!4v1778192066220!5m2!1ses-419!2smx",
     whatsapp: "https://api.whatsapp.com/send?phone=52[12324324232423]",
   },
   

@@ -52,9 +52,9 @@ export default function Navbar() {
             {/* Navegacion de escritorio - Oculta en movil */}
             <nav className="hidden lg:flex items-center gap-8">
               {navLinks.map((item, index) => (
-                <motion.button
+                <motion.a
                   key={item.href}
-                  onClick={() => handleNav(item.href)}
+                  href={item.href}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -63,7 +63,7 @@ export default function Navbar() {
                   {item.label}
                   {/* Linea inferior que aparece al pasar el mouse */}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                </motion.button>
+                </motion.a>
               ))}
             </nav>
 
@@ -101,13 +101,14 @@ export default function Navbar() {
             >
               <nav className="container px-4 py-4 flex flex-col gap-2">
                 {navLinks.map((link) => (
-                  <button
+                  <a
                     key={link.href}
+                    href={link.href}
                     onClick={() => handleNav(link.href)}
                     className="py-3 px-4 text-foreground hover:bg-muted rounded-lg transition-colors text-left"
                   >
                     {link.label}
-                  </button>
+                  </a>
                 ))}
                 <Button
                   variant="default"
