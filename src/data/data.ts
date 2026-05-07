@@ -1,50 +1,56 @@
+// Archivo central de datos - Contiene toda la informacion estatica del sitio
+// Aqui se modifican textos, imagenes y contenido sin tocar los componentes
+
 import { StaticImageData } from "next/image";
-import banner1 from "@/assets/Banner-1.jpeg";
-import banner2 from "@/assets/Banner-2.jpeg";
-import banner3 from "@/assets/Banner-3.jpeg";
+import banner1 from "@/assets/Banner-1.jpeg";  // Imagen del primer banner
+import banner2 from "@/assets/Banner-2.jpeg";  // Imagen del segundo banner
+import banner3 from "@/assets/Banner-3.jpeg";  // Imagen del tercer banner
+
+// Definicion de tipos para TypeScript - Ayuda a mantener el codigo ordenado
+// Cada interfaz define la estructura de una seccion especifica
 
 export interface Banner {
   id: number;
-  title: string;
-  subtitle: string;
-  image: StaticImageData;
+  title: string;      // Titulo grande del banner
+  subtitle: string;   // Texto debajo del titulo
+  image: StaticImageData;  // Imagen de fondo
 }
 
 export interface Distinctive {
   id: number;
-  title: string;
-  description: string;
+  title: string;        // Nombre del distintivo (ej: Abastecimiento Garantizado)
+  description: string;  // Explicacion corta
 }
 
 export interface Feature {
   id: number;
-  text: string;
+  text: string;  // Caracteristicas principales de la empresa
 }
 
 export interface AboutSection {
-  concept: string;
-  mission: string;
-  trajectory: string;
-  valueAdd: string;
+  concept: string;     // Que es la empresa
+  mission: string;     // Proposito principal
+  trajectory: string;  // Historia y experiencia
+  valueAdd: string;    // Que los hace diferentes
 }
 
 export interface LogisticsPoint {
   id: number;
-  title: string;
-  description: string;
+  title: string;        // Nombre del punto logístico
+  description: string;   // Explicacion de ese servicio
 }
 
 export interface LogisticsSection {
-  description: string;
-  points: LogisticsPoint[];
+  description: string;      // Texto introductorio de la seccion
+  points: LogisticsPoint[]; // Lista de puntos logísticos
 }
 
 export interface Sector {
   id: number;
-  name: string;
-  description: string;
-  image?: StaticImageData;
-  isMain?: boolean;
+  name: string;           // Nombre del sector industrial
+  description: string;     // Que insumos se les provee
+  image?: StaticImageData; // Imagen (opcional, para sectores principales)
+  isMain?: boolean;        // true = se muestra grande arriba, false = icono pequeno
 }
 
 export interface AboutSection {
@@ -52,41 +58,44 @@ export interface AboutSection {
   mission: string;
   trajectory: string;
   valueAdd: string;
-  image?: StaticImageData;
+  image?: StaticImageData;  // Imagen de la seccion Sobre Nosotros
 }
 
 export interface ContactInfo {
-  email: string;
-  phone: string;
-  address: string;
-  mapUrl: string;
-  whatsapp?: string;
+  email: string;      // Correo electronico de contacto
+  phone: string;      // Telefono de la empresa
+  address: string;    // Direccion fisica
+  mapUrl: string;     // URL del mapa de Google Maps embebido
+  whatsapp?: string;  // Enlace de WhatsApp (opcional)
 }
 
 export interface PhilosophyItem {
   id: number;
-  title: string;
-  description: string;
+  title: string;        // Titulo del valor filosofico
+  description: string;  // Explicacion del valor
 }
 
+// Interfaz principal que agrupa toda la informacion del sitio
 export interface SiteData {
-  siteName: string;
-  siteDescription: string;
-  banners: Banner[];
-  distinctives: Distinctive[];
-  features: Feature[];
-  about: AboutSection;
-  logistics: LogisticsSection;
-  sectors: Sector[];
-  philosophy: PhilosophyItem[];
-  contact: ContactInfo;
+  siteName: string;           // Nombre de la empresa
+  siteDescription: string;    // Descripcion para SEO y metadatos
+  banners: Banner[];          // Carrusel de la pagina principal
+  distinctives: Distinctive[]; // 3 puntos destacados debajo del hero
+  features: Feature[];        // 4 caracteristicas principales
+  about: AboutSection;        // Informacion de Sobre Nosotros
+  logistics: LogisticsSection; // Soluciones logísticas
+  sectors: Sector[];          // Lista de industrias atendidas
+  philosophy: PhilosophyItem[]; // Valores filosoficos
+  contact: ContactInfo;       // Informacion de contacto
 }
 
 
+// Objeto principal con todos los datos - MODIFICA AQUI para cambiar contenido
 export const siteData: SiteData = {
   siteName: "LSol Comercializadora Internacional",
   siteDescription:
     "Suministro estratégico de materias primas e insumos químicos para la industria. Importación y distribución con respaldo global.",
+  // Banners del carrusel principal - 3 imagenes con texto
   banners: [
   {
     id: 1,
@@ -110,6 +119,7 @@ export const siteData: SiteData = {
     image: banner3,
   },
 ],
+  // 3 distintivos que aparecen debajo del carrusel
   distinctives: [
     {
       id: 1,
@@ -130,6 +140,7 @@ export const siteData: SiteData = {
         "Rigurosos estándares en la selección y manejo de cada insumo.",
     },
   ],
+  // Caracteristicas principales de la empresa
   features: [
     {
       id: 1,
@@ -148,6 +159,7 @@ export const siteData: SiteData = {
       text: "Gestión ética y profesional de insumos industriales.",
     },
   ],
+  // Seccion Sobre Nosotros - Informacion de la empresa
   about: {
     concept:
       "Somos una comercializadora de vanguardia dedicada a la importación y distribución de materias primas. Operamos como el enlace vital entre los productores globales de insumos químicos y la industria nacional.",
@@ -158,6 +170,7 @@ export const siteData: SiteData = {
     valueAdd:
       "En LSol, no solo entregamos productos; gestionamos soluciones. Nos comprometemos con el éxito de sus proyectos optimizando cada etapa del proceso de adquisición.",
   },
+  // Seccion Soluciones Logísticas
   logistics: {
     description:
       "Entendemos que un retraso en la materia prima significa una pérdida en la producción. Por ello, nuestra propuesta de valor se centra en blindar su operación:",
@@ -188,6 +201,7 @@ export const siteData: SiteData = {
       },
     ],
   },
+  // Sectores industriales atendidos - 4 principales con imagen, 6 con icono
   sectors: [
     {
       id: 1,
@@ -244,6 +258,7 @@ export const siteData: SiteData = {
       description: "Portafolio diverso para necesidades técnicas específicas.",
     },
   ],
+  // Valores filosoficos de la empresa
   philosophy: [
     {
       id: 1,
@@ -266,13 +281,14 @@ export const siteData: SiteData = {
       description: "El trabajo en equipo siempre da mejores resultados.",
     },
   ],
+  // Informacion de contacto - IMPORTANTE: Reemplaza los placeholders [Insertar...]
   contact: {
-    email: "[Insertar Correo]",
-    phone: "[Insertar Teléfono]",
-    address: "[Insertar Dirección de Oficinas / Almacén]",
+    email: "ejemplo@ghmail.com",
+    phone: "477 123 45 56",
+    address: "Hey Hey Studio blvd",
     mapUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12096.288981944748!2d-99.133208!3d19.432608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x789c79fe9f16b7e2!2sZocalo%2C%20Mexico%20City!5e0!3m2!1sen!2smx!4v1234567890",
-    whatsapp: "https://api.whatsapp.com/send?phone=52[InsertarNumero]",
+    whatsapp: "https://api.whatsapp.com/send?phone=52[12324324232423]",
   },
   
 };

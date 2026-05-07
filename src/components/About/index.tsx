@@ -1,16 +1,20 @@
+// Seccion Sobre Nosotros - Informacion de la empresa
+// Muestra concepto, mision, trayectoria y valor agregado
+
 "use client";
 
 import { siteData } from "@/data/data";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Heart, Shield, Clock, Users } from "lucide-react";
 
 export default function About() {
-  const about = siteData.about;
+  const about = siteData.about;  // Obtiene datos de la seccion about
 
   return (
-    <section id="sobre-nosotros" className="section-padding bg-background scroll-mt-24">
+    <section id="sobre-nosotros" className="section-padding bg-background scroll-mt-24">     {/* Seccion con ID para navegacion y padding vertical */}
+
       <div className="container">
+        {/* Titulo de la seccion con animacion al aparecer */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -22,14 +26,17 @@ export default function About() {
           </h2>
         </motion.div>
 
+        {/* Grid de 2 columnas: imagen izquierda, concepto derecha */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          {/* Columna izquierda: Imagen de la empresa */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -30 }}  // Entra desde la izquierda
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-muted flex items-center justify-center"
           >
+            {/* Muestra imagen si existe, sino placeholder */}
             {about.image ? (
               <Image
                 src={about.image}
@@ -39,13 +46,14 @@ export default function About() {
               />
             ) : (
               <div className="text-muted-foreground text-center p-8">
-                <p>[Insertar imagen]</p>
+                <p>Imagen</p>
               </div>
             )}
           </motion.div>
 
+          {/* Columna derecha: Tarjeta con Concepto */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 30 }}  // Entra desde la derecha
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
@@ -59,17 +67,6 @@ export default function About() {
                 {about.concept}
               </p>
             </div>
-          </motion.div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
             <div className="bg-card border border-border rounded-3xl p-8">
               <h3 className="text-xl font-semibold text-foreground mb-3">
                 Nuestra Misión
@@ -78,6 +75,20 @@ export default function About() {
                 {about.mission}
               </p>
             </div>
+          </motion.div>
+        </div>
+
+        {/* Segunda fila: Mision y Trayectoria izquierda, Valor Agregado derecha */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Columna izquierda: Mision y Trayectoria */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            
             <div className="bg-card border border-border rounded-3xl p-8">
               <h3 className="text-xl font-semibold text-foreground mb-3">
                 Trayectoria
@@ -88,6 +99,7 @@ export default function About() {
             </div>
           </motion.div>
 
+          {/* Columna derecha: Valor Agregado */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}

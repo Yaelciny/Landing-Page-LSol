@@ -1,22 +1,27 @@
-import { Geist, Geist_Mono, Sora } from "next/font/google";
-import "./globals.css";
+// Layout raiz de la aplicacion - Define la estructura HTML base
+// Configura fuentes, metadatos e importa estilos globales
 
+import { Geist, Geist_Mono, Sora } from "next/font/google";
+import "./globals.css";  // Estilos globales con Tailwind
+
+// Configuracion de fuentes de Google Fonts
 const geistSans = Geist({
-  variable: "--font-geist-sans",
+  variable: "--font-geist-sans",  // Fuente para texto normal
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-geist-mono",  // Fuente monoespaciada
   subsets: ["latin"],
 });
 
 const sora = Sora({
-  variable: "--font-sora",
+  variable: "--font-sora",  // Fuente para titulos
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
 });
 
+// Layout principal que envuelve a todas las paginas
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,11 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="es"
+      lang="es"  // Idioma del sitio
       className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
+        {children}  {/* Renderiza el contenido de la pagina */}
       </body>
     </html>
   );

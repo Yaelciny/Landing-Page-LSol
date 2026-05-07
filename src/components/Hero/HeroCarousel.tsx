@@ -1,40 +1,47 @@
+// Carrusel de banners principal - 3 imagenes que rotan automaticamente
+// Se pausa al pasar el mouse encima y tiene flechas de navegacion
+
 "use client";
 
 import { useState, useEffect } from "react";
 import { siteData } from "@/data/data";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";  // Flechas de navegacion
 import Image from "next/image";
 
 export default function HeroCarousel() {
-  const [current, setCurrent] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const banners = siteData.banners;
+  const [current, setCurrent] = useState(0);  // Banner actualmente visible
+  const [isPaused, setIsPaused] = useState(false);  // Si el carrusel esta pausado
+  const banners = siteData.banners;  // Obtiene los banners del archivo de datos
 
+  // Efecto para cambiar el banner automaticamente cada 5 segundos
+  // Se pausa si isPaused es true (cuando el mouse esta encima)
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % banners.length);
+      setCurrent((prev) => (prev + 1) % banners.length);  // Cambia al siguiente (vuelve al primero despues del ultimo)
     }, 5000);
-    return () => clearInterval(timer);
+    return () => clearInterval(timer);  // Limpia el intervalo al desmontar
   }, [banners.length, isPaused]);
 
-  const next = () => setCurrent((prev) => (prev + 1) % banners.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + banners.length) % banners.length);
+  // Funciones para navegar entre banners manualmente
+  const next = () => setCurrent((prev) => (prev + 1) % banners.length);  // Siguiente banner
+  const prev = () => setCurrent((prev) => (prev - 1 + banners.length) % banners.length);  // Banner anterior
 
   return (
     <section
-      id="inicio"
-      className="relative h-screen overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      id="inicio"  // ID para navegacion
+      className="relative h-screen overflow-hidden"  // Ocupa toda la pantalla
+      onMouseEnter={() => setIsPaused(true)}   // Pausa al pasar mouse
+      onMouseLeave={() => setIsPaused(false)}  // Reanuda al quitar mouse
     >
+      {/* Contenedor de imagenes con animacion de desvanecimiento */}
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0 }}  // Empieza invisible
+          animate={{ opacity: 1 }}  // Se vuelve visible
+          exit={{ opacity: 0 }}    // Se desvanece al salir
           transition={{ duration: 0.7 }}
           className="absolute inset-0"
         >
@@ -42,19 +49,20 @@ export default function HeroCarousel() {
             src={banners[current].image}
             alt={banners[current].title}
             fill
-            priority
+            priority  // Carga prioridad alta (LCP)
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-black/40" />  {/* Overlay oscuro para legibilidad */}
         </motion.div>
       </AnimatePresence>
 
+      {/* Contenido de texto sobre la imagen */}
       <div className="relative z-10 h-full flex items-center justify-center">
         <div className="container">
           <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            key={current}  // Re-renderiza animacion al cambiar banner
+            initial={{ opacity: 0, y: 30 }}  // Empieza abajo e invisible
+            animate={{ opacity: 1, y: 0 }}  // Termina arriba y visible
             transition={{ duration: 0.7 }}
             className="text-center max-w-5xl mx-auto px-6"
           >
@@ -64,6 +72,7 @@ export default function HeroCarousel() {
             <p className="text-xl md:text-2xl text-zinc-200 max-w-3xl mx-auto mb-8">
               {banners[current].subtitle}
             </p>
+            {/* Boton que hace scroll a la seccion de contacto */}
             <button
               onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
               className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all hover:scale-105"
@@ -74,6 +83,7 @@ export default function HeroCarousel() {
         </div>
       </div>
 
+      {/* Flechas de navegacion a los lados */}
       <button
         onClick={prev}
         className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
@@ -89,6 +99,7 @@ export default function HeroCarousel() {
         <ChevronRight className="w-6 h-6 text-white" />
       </button>
 
+      {/* Indicadores de puntos abajo - Clickeables para ir a un banner especifico */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {banners.map((_, i) => (
           <button
