@@ -6,6 +6,8 @@
 import { siteData } from "@/data/data";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";  // Iconos de contacto
+import Image from "next/image";
+
 
 // Enlaces de navegacion para el footer
 const footerLinks = [
@@ -37,14 +39,12 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold mb-4">
-              {/* Solo la primera palabra "LSol" en color primario */}
-              <span className="text-primary">{siteData.siteName.split(" ")[0]}</span>
-              {" "}{siteData.siteName.split(" ").slice(1).join(" ")}
-            </h3>
-            <p className="text-background/70 max-w-sm leading-relaxed text-sm">
-              {siteData.siteDescription}
-            </p>
+            <Image
+              src={siteData.siteLogoWhite}
+              alt={`logo de ${siteData.siteName}`}
+              className="object-contain w-auto h-8 md:h-10 lg:h-15" // Mantiene proporciones. h-8 en móvil, h-10 en PC.
+              priority
+            />
           </motion.div>
 
           {/* Columna 2: Enlaces de navegacion */}

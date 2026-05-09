@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { siteData } from "@/data/data";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";  // Iconos para menu hamburguesa
+import Image from "next/image";
 
 // Enlaces de navegacion - Al hacer clic se hace scroll suave a la seccion
 const navLinks = [
@@ -44,9 +45,12 @@ export default function Navbar() {
               href="#inicio"
               className="text-2xl font-bold text-foreground font-sora"
             >
-              <span className="text-gradient">
-                {siteData.siteName.split(" ")[0]}
-              </span>
+              <Image
+                src={siteData.siteLogo}
+                alt={`logo de ${siteData.siteName}`}
+                className="object-contain w-auto h-8 md:h-10" // Mantiene proporciones. h-8 en móvil, h-10 en PC.
+                priority
+              />
             </motion.a>
 
             {/* Navegacion de escritorio - Oculta en movil */}
@@ -110,13 +114,6 @@ export default function Navbar() {
                     {link.label}
                   </a>
                 ))}
-                <Button
-                  variant="default"
-                  className="mt-2 w-full"
-                  onClick={() => handleNav("#contacto")}
-                >
-                  Cotizar ahora
-                </Button>
               </nav>
             </motion.div>
           )}

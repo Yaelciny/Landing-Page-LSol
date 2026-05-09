@@ -36,19 +36,12 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-muted flex items-center justify-center"
           >
-            {/* Muestra imagen si existe, sino placeholder */}
-            {about.image ? (
-              <Image
-                src={about.image}
-                alt="LSol Comercializadora"
-                fill
-                className="object-cover"
-              />
-            ) : (
-              <div className="text-muted-foreground text-center p-8">
-                <p>Imagen</p>
-              </div>
-            )}
+            <Image
+              src={about.image}
+              alt="LSol Comercializadora"
+              fill
+              className="object-cover w-auto h-8 md:h-10"
+            />
           </motion.div>
 
           {/* Columna derecha: Tarjeta con Concepto */}
@@ -88,7 +81,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            
+
             <div className="bg-card border border-border rounded-3xl p-8">
               <h3 className="text-xl font-semibold text-foreground mb-3">
                 Trayectoria

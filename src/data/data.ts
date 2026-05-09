@@ -2,9 +2,16 @@
 // Aqui se modifican textos, imagenes y contenido sin tocar los componentes
 
 import { StaticImageData } from "next/image";
-import banner1 from "@/assets/Banner-1.jpeg";  // Imagen del primer banner
-import banner2 from "@/assets/Banner-2.jpeg";  // Imagen del segundo banner
-import banner3 from "@/assets/Banner-3.jpeg";  // Imagen del tercer banner
+import logo from "@/assets/Logo/Logo-LSol.png";  // Imagen del logo de LSol
+import logoWhite from "@/assets/Logo/Logo-Lsol-Blanco.png";  // Imagen del logo de LSol
+import banner1 from "@/assets/Banners/Banner-1.jpeg";  // Imagen del primer banner
+import banner2 from "@/assets/Banners/Banner-2.jpeg";  // Imagen del segundo banner
+import banner3 from "@/assets/Banners/Banner-3.jpeg";  // Imagen del tercer banner
+import about from "@/assets/About/Imagen-LSol.png"; // Imagen de sobre nostros
+import sector1 from "@/assets/Sectores/Industria-Curtidora.png";
+import sector2 from "@/assets/Sectores/Plastificantes.png";
+import sector3 from "@/assets/Sectores/Sector-alimenticio.png";
+import sector4 from "@/assets/Sectores/Tratamiento-agua.png";
 
 // Definicion de tipos para TypeScript - Ayuda a mantener el codigo ordenado
 // Cada interfaz define la estructura de una seccion especifica
@@ -58,7 +65,7 @@ export interface AboutSection {
   mission: string;
   trajectory: string;
   valueAdd: string;
-  image?: StaticImageData;  // Imagen de la seccion Sobre Nosotros
+  image: StaticImageData;  // Imagen de la seccion Sobre Nosotros
 }
 
 export interface ContactInfo {
@@ -77,6 +84,8 @@ export interface PhilosophyItem {
 
 // Interfaz principal que agrupa toda la informacion del sitio
 export interface SiteData {
+  siteLogo: StaticImageData;
+  siteLogoWhite: StaticImageData;
   siteName: string;           // Nombre de la empresa
   siteDescription: string;    // Descripcion para SEO y metadatos
   banners: Banner[];          // Carrusel de la pagina principal
@@ -92,6 +101,8 @@ export interface SiteData {
 
 // Objeto principal con todos los datos - MODIFICA AQUI para cambiar contenido
 export const siteData: SiteData = {
+  siteLogo: logo,
+  siteLogoWhite: logoWhite,
   siteName: "LSol Comercializadora Internacional",
   siteDescription:
     "Suministro estratégico de materias primas e insumos químicos para la industria. Importación y distribución con respaldo global.",
@@ -169,6 +180,7 @@ export const siteData: SiteData = {
       "Contamos con una estructura operativa robusta que nos permite atender sectores diversos, desde la industria textil hasta la alimenticia, siempre bajo la premisa de la transparencia y la excelencia operativa.",
     valueAdd:
       "En LSol, no solo entregamos productos; gestionamos soluciones. Nos comprometemos con el éxito de sus proyectos optimizando cada etapa del proceso de adquisición.",
+    image: about
   },
   // Seccion Soluciones Logísticas
   logistics: {
@@ -207,24 +219,28 @@ export const siteData: SiteData = {
       id: 1,
       name: "Industria Curtidora",
       description: "Especialidades químicas para el proceso de cuero.",
+      image : sector1,
       isMain: true,
     },
     {
       id: 2,
       name: "Plastificantes",
       description: "Insumos para la transformación de polímeros.",
+      image : sector2,
       isMain: true,
     },
     {
       id: 3,
       name: "Sector Alimenticio",
       description: "Materias primas de grado alimenticio certificadas.",
+      image : sector3,
       isMain: true,
     },
     {
       id: 4,
       name: "Tratamiento de Aguas",
       description: "Soluciones para purificación y manejo de efluentes.",
+      image : sector4,
       isMain: true,
     },
     {
