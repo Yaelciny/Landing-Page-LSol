@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { siteData } from "@/data/data";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";  // Flechas de navegacion
@@ -16,33 +16,38 @@ export default function HeroCarousel() {
 
   // Efecto para cambiar el banner automaticamente cada 5 segundos
   // Se pausa si isPaused es true (cuando el mouse esta encima)
+  // Funciones para navegar entre banners manualmente
+  const next = useCallback(
+    () => setCurrent((prev) => (prev + 1) % banners.length),
+    [banners.length]
+  );  // Siguiente banner
+
+  const prev = useCallback(
+    () => setCurrent((prev) => (prev - 1 + banners.length) % banners.length),
+    [banners.length]
+  );  // Banner anterior
+
   useEffect(() => {
     if (isPaused) return;
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % banners.length);  // Cambia al siguiente (vuelve al primero despues del ultimo)
-    }, 5000);
+    const timer = setInterval(next, 5000);
     return () => clearInterval(timer);  // Limpia el intervalo al desmontar
-  }, [banners.length, isPaused]);
-
-  // Funciones para navegar entre banners manualmente
-  const next = () => setCurrent((prev) => (prev + 1) % banners.length);  // Siguiente banner
-  const prev = () => setCurrent((prev) => (prev - 1 + banners.length) % banners.length);  // Banner anterior
+  }, [isPaused, next]);
 
   return (
     <section
       id="inicio"  // ID para navegacion
-      className="relative h-screen overflow-hidden"  // Ocupa toda la pantalla
+      className="relative h-dvh overflow-hidden"  // Ocupa toda la pantalla
       onMouseEnter={() => setIsPaused(true)}   // Pausa al pasar mouse
       onMouseLeave={() => setIsPaused(false)}  // Reanuda al quitar mouse
     >
       {/* Contenedor de imagenes con animacion de desvanecimiento */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false}>
         <motion.div
           key={current}
           initial={{ opacity: 0 }}  // Empieza invisible
           animate={{ opacity: 1 }}  // Se vuelve visible
           exit={{ opacity: 0 }}    // Se desvanece al salir
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.9 }}
           className="absolute inset-0"
         >
           <Image
@@ -52,7 +57,7 @@ export default function HeroCarousel() {
             priority  // Carga prioridad alta (LCP)
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/40" />  {/* Overlay oscuro para legibilidad */}
+          <div className="absolute bg-gradient-to-b inset-0 bg-black/40" />  {/* Overlay oscuro para legibilidad */}
         </motion.div>
       </AnimatePresence>
 
