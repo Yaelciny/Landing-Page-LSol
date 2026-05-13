@@ -3,7 +3,7 @@
 
 "use client";
 
-import { siteData } from "@/data/data";
+import { siteData } from "@/data/nat";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";  // Iconos de contacto
 import Image from "next/image";

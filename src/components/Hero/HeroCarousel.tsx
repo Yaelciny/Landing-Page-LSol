@@ -4,7 +4,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { siteData } from "@/data/data";
+import { siteData } from "@/data/nat";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";  // Flechas de navegacion
 import Image from "next/image";

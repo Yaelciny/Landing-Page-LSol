@@ -3,7 +3,7 @@
 
 "use client";
 
-import { siteData } from "@/data/data";
+import { siteData } from "@/data/nat";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";  // Iconos de contacto
 import { useState } from "react";
@@ -19,38 +19,38 @@ export default function Contact() {
 
   // Maneja el envio del formulario - Llama a la API y genera mailto link
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setSubmitted(true);
+    e.preventDefault();
+    setSubmitted(true);
 
-  try {
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formState),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-
-      if (data.mailtoLink) {
-        window.location.href = data.mailtoLink;
-      }
-
-      setFormState({
-        name: "",
-        email: "",
-        message: "",
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
       });
 
-      setTimeout(() => setSubmitted(false), 4000);
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data.mailtoLink) {
+          window.location.href = data.mailtoLink;
+        }
+
+        setFormState({
+          name: "",
+          email: "",
+          message: "",
+        });
+
+        setTimeout(() => setSubmitted(false), 4000);
+      }
+    } catch (error) {
+      console.error(error);
+      setSubmitted(false);
     }
-  } catch (error) {
-    console.error(error);
-    setSubmitted(false);
-  }
-};
+  };
 
   return (
     <section id="contacto" className="section-padding bg-muted/30 scroll-mt-24">
@@ -70,7 +70,7 @@ export default function Contact() {
         {/* Grid de 2 columnas: formulario izquierda, info derecha */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}  
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="space-y-8"
@@ -162,12 +162,12 @@ export default function Contact() {
 
             {/* Informacion de contacto debajo del formulario */}
             <div className="space-y-6">
-               {/* Mapea email, telefono y direccion con animacion */}
-               {[
-                 { icon: Mail, value: contact.email, href: `mailto:${contact.email}` },
-                 { icon: Phone, value: contact.phone, href: `tel:${contact.phone}` },
-                 { icon: MapPin, value: contact.address, href: undefined },  // Direccion no tiene link
-               ].map((item, i) => {
+              {/* Mapea email, telefono y direccion con animacion */}
+              {[
+                { icon: Mail, value: contact.email, href: `mailto:${contact.email}` },
+                { icon: Phone, value: contact.phone, href: `tel:${contact.phone}` },
+                { icon: MapPin, value: contact.address, href: undefined },  // Direccion no tiene link
+              ].map((item, i) => {
                 const Icon = item.icon;
                 const content = (
                   <>

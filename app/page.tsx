@@ -2,7 +2,7 @@
 // Esta es la estructura principal que el usuario ve al entrar al sitio
 
 import { Metadata } from "next";
-import { siteData } from "@/data/data";
+import { siteData } from "@/data/nat";
 import Navbar from "@/components/Navbar";       // Barra de navegacion superior
 import Hero from "@/components/Hero";           // Seccion principal con carrusel de banners
 import dynamic from "next/dynamic";

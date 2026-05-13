@@ -5,7 +5,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { siteData } from "@/data/data";
+import { siteData } from "@/data/nat";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";  // Iconos para menu hamburguesa
 import Image from "next/image";

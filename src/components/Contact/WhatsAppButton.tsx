@@ -3,7 +3,7 @@
 
 "use client";
 
-import { siteData } from "@/data/data";
+import { siteData } from "@/data/nat";
 import { MessageCircle } from "lucide-react";  // Icono de WhatsApp
 import { useEffect, useState } from "react";
 

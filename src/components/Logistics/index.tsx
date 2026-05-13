@@ -3,7 +3,7 @@
 
 "use client";
 
-import { siteData } from "@/data/data";
+import { siteData } from "@/data/nat";
 import { motion } from "framer-motion";
 import { Link, Truck, AlertTriangle, Package } from "lucide-react";  // Iconos para cada punto
 
