@@ -3,6 +3,7 @@
 
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { siteData } from "@/data/nat";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";  // Iconos de contacto
@@ -28,6 +29,20 @@ const serviceLinks = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHome = pathname === "/";
+
+  // Funcion para navegar a una seccion
+  const handleNav = (href: string) => {
+    if (isHome) {
+      const el = document.querySelector(href);
+      el?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push(`/${href}`);
+    }
+  };
+
   return (
     <footer className="bg-foreground text-background py-16 md:py-20">
       <div className="container">
@@ -60,6 +75,10 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNav(link.href);
+                    }}
                     className="text-background/70 hover:text-primary transition-colors text-sm"
                   >
                     {link.label}
@@ -82,6 +101,10 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNav(link.href);
+                    }}
                     className="text-background/70 hover:text-primary transition-colors text-sm"
                   >
                     {link.label}
