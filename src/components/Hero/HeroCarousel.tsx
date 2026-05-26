@@ -1,5 +1,6 @@
 // Carrusel de banners principal - 3 imagenes que rotan automaticamente
 // Se pausa al pasar el mouse encima y tiene flechas de navegacion
+// Optimizado para LCP: usa <picture> con srcset para servir imagenes responsivas
 
 "use client";
 
@@ -7,7 +8,6 @@ import { useState, useEffect, useCallback } from "react";
 import { siteData } from "@/data/nat";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";  // Flechas de navegacion
-import Image from "next/image";
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);  // Banner actualmente visible
@@ -33,10 +33,12 @@ export default function HeroCarousel() {
     return () => clearInterval(timer);  // Limpia el intervalo al desmontar
   }, [isPaused, next]);
 
+  const banner = banners[current];
+
   return (
     <section
       id="inicio"  // ID para navegacion
-      className="relative h-dvh overflow-hidden"  // Ocupa toda la pantalla
+      className="relative h-dvh overflow-hidden bg-black"  // bg-black evita flash blanco en carga
       onMouseEnter={() => setIsPaused(true)}   // Pausa al pasar mouse
       onMouseLeave={() => setIsPaused(false)}  // Reanuda al quitar mouse
     >
@@ -50,16 +52,51 @@ export default function HeroCarousel() {
           transition={{ duration: 0.9 }}
           className="absolute inset-0"
         >
-          <Image
-            src={banners[current].image}
-            alt={banners[current].title}
-            fill
-            priority  // Carga prioridad alta (LCP)
-            className="object-cover"
-          />
+          {/* picture element para servir la imagen del tamaño correcto segun viewport */}
+          <picture>
+            <source
+              media="(max-width: 640px)"
+              srcSet={banner.imageSm.src}
+              type="image/webp"
+            />
+            <source
+              media="(max-width: 1024px)"
+              srcSet={banner.imageMd.src}
+              type="image/webp"
+            />
+            <source
+              media="(min-width: 1025px)"
+              srcSet={banner.imageLg.src}
+              type="image/webp"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={banner.imageLg.src}
+              alt={banner.title}
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+              width={1920}
+              height={1080}
+            />
+          </picture>
           <div className="absolute bg-gradient-to-b inset-0 bg-black/40" />  {/* Overlay oscuro para legibilidad */}
         </motion.div>
       </AnimatePresence>
+
+      {/* Precargar las imagenes del siguiente banner para evitar flash al cambiar */}
+      <div className="hidden">
+        {banners.map((b, i) =>
+          i !== current ? (
+            <link
+              key={b.id}
+              rel="prefetch"
+              href={b.imageLg.src}
+              as="image"
+            />
+          ) : null
+        )}
+      </div>
 
       {/* Contenido de texto sobre la imagen */}
       <div className="relative z-10 h-full flex items-center justify-center">
@@ -72,10 +109,10 @@ export default function HeroCarousel() {
             className="text-center max-w-5xl mx-auto px-6"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
-              {banners[current].title}
+              {banner.title}
             </h1>
             <p className="text-xl md:text-2xl text-zinc-200 max-w-3xl mx-auto mb-8">
-              {banners[current].subtitle}
+              {banner.subtitle}
             </p>
             {/* Boton que hace scroll a la seccion de contacto */}
             <button

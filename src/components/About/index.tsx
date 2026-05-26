@@ -40,6 +40,8 @@ export default function About() {
               src={about.image}
               alt="LSol Comercializadora"
               fill
+              loading="lazy"
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover w-auto h-8 md:h-10"
             />
           </motion.div>

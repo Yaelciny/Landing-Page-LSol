@@ -7,6 +7,16 @@ import logoWhite from "@/assets/Logo/Logo-Lsol-Blanco.webp";  // Imagen del logo
 import banner1 from "@/assets/Banners/Banner-1.webp";  // Imagen del primer banner
 import banner2 from "@/assets/Banners/Banner-2.webp";  // Imagen del segundo banner
 import banner3 from "@/assets/Banners/Banner-3.webp";  // Imagen del tercer banner
+// Variantes responsivas de los banners para diferentes tamaños de pantalla
+import banner1Sm from "@/assets/Banners/Banner-1-sm.webp";
+import banner1Md from "@/assets/Banners/Banner-1-md.webp";
+import banner1Lg from "@/assets/Banners/Banner-1-lg.webp";
+import banner2Sm from "@/assets/Banners/Banner-2-sm.webp";
+import banner2Md from "@/assets/Banners/Banner-2-md.webp";
+import banner2Lg from "@/assets/Banners/Banner-2-lg.webp";
+import banner3Sm from "@/assets/Banners/Banner-3-sm.webp";
+import banner3Md from "@/assets/Banners/Banner-3-md.webp";
+import banner3Lg from "@/assets/Banners/Banner-3-lg.webp";
 import about from "@/assets/About/Imagen-LSol.webp"; // Imagen de sobre nostros
 import sector1 from "@/assets/Sectores/Industria-Curtidora.webp";
 import sector2 from "@/assets/Sectores/Plastificantes.webp";
@@ -20,7 +30,10 @@ export interface Banner {
   id: number;
   title: string;      // Titulo grande del banner
   subtitle: string;   // Texto debajo del titulo
-  image: StaticImageData;  // Imagen de fondo
+  image: StaticImageData;  // Imagen de fondo (fallback)
+  imageSm: StaticImageData;  // Imagen móvil (640px)
+  imageMd: StaticImageData;  // Imagen tablet (1024px)
+  imageLg: StaticImageData;  // Imagen desktop (1920px)
 }
 
 export interface Distinctive {
@@ -118,6 +131,9 @@ export const siteData: SiteData = {
       subtitle:
         "Suministro estratégico de materias primas e insumos químicos para la industria.",
       image: banner1,
+      imageSm: banner1Sm,
+      imageMd: banner1Md,
+      imageLg: banner1Lg,
     },
     {
       id: 2,
@@ -125,6 +141,9 @@ export const siteData: SiteData = {
       subtitle:
         "Abastecimiento eficaz con soluciones logísticas a la medida de su empresa.",
       image: banner2,
+      imageSm: banner2Sm,
+      imageMd: banner2Md,
+      imageLg: banner2Lg,
     },
     {
       id: 3,
@@ -132,6 +151,9 @@ export const siteData: SiteData = {
       subtitle:
         "Importación y distribución con respaldo global y atención personalizada.",
       image: banner3,
+      imageSm: banner3Sm,
+      imageMd: banner3Md,
+      imageLg: banner3Lg,
     },
   ],
   // 3 distintivos que aparecen debajo del carrusel
