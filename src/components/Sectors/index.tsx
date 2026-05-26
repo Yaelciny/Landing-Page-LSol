@@ -88,7 +88,7 @@ export default function Sectors() {
                       href={`/productos#sector-${sector.id}`}
                       className="inline-flex items-center gap-1.5 mt-2 text-xs font-medium text-white/80 hover:text-primary transition-colors group/link"
                     >
-                      Ver productos
+                      Ver mas
                       <ArrowRight className="size-3 group-hover/link:translate-x-0.5 transition-transform" />
                     </Link>
                   )}

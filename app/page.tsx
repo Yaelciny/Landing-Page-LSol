@@ -14,47 +14,14 @@ const Contact = dynamic(() => import("@/components/Contact"));      // Seccion d
 const Footer = dynamic(() => import("@/components/Footer"));        // Pie de pagina
 const WhatsAppFloat = dynamic(() => import("@/components/Contact/WhatsAppButton")); // Boton flotante de WhatsApp
 
-// Configuracion de metadatos SEO para la pagina principal
-// Esto ayuda a los buscadores a entender de que trata el sitio
+// Metadata especifica de la pagina de inicio
+// Se combina con el metadata global del layout
 export const metadata: Metadata = {
-  title: {
-    default: siteData.siteName,
-    template: `%s | ${siteData.siteName}`,
+  alternates: {
+    canonical: "/",
   },
-  description: siteData.siteDescription,
-  keywords: [
-    "comercializadora internacional",
-    "materias primas",
-    "insumos químicos",
-    "importación",
-    "distribución",
-    "logística",
-    "industria",
-    "LSol",
-  ],
-  authors: [{ name: siteData.siteName }],
   openGraph: {
-    title: siteData.siteName,
-    description: siteData.siteDescription,
-    type: "website",
-    locale: "es_MX",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: siteData.siteName,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteData.siteName,
-    description: siteData.siteDescription,
-  },
-  robots: {
-    index: true,
-    follow: true,
+    url: "/",
   },
 };
 

@@ -31,16 +31,16 @@ const iconMap: Record<number, React.ElementType> = {
 
 // Colores sutiles para las tarjetas de productos por sector
 const sectorAccents: Record<number, string> = {
-  1: "from-amber-500/10 to-orange-500/5",
-  2: "from-blue-500/10 to-cyan-500/5",
-  3: "from-green-500/10 to-emerald-500/5",
-  4: "from-sky-500/10 to-blue-500/5",
-  5: "from-stone-500/10 to-neutral-500/5",
-  6: "from-violet-500/10 to-purple-500/5",
+  1: "from-pink-500/10 to-rose-500/5",
+  2: "from-pink-500/10 to-rose-500/5",
+  3: "from-pink-500/10 to-rose-500/5",
+  4: "from-pink-500/10 to-rose-500/5",
+  5: "from-pink-500/10 to-rose-500/5",
+  6: "from-pink-500/10 to-rose-500/5",
   7: "from-pink-500/10 to-rose-500/5",
-  8: "from-indigo-500/10 to-blue-500/5",
-  9: "from-yellow-500/10 to-amber-500/5",
-  10: "from-red-500/10 to-orange-500/5",
+  8: "from-pink-500/10 to-rose-500/5",
+  9: "from-pink-500/10 to-rose-500/5",
+  10: "from-pink-500/10 to-rose-500/5",
 };
 
 export default function ProductosContent() {

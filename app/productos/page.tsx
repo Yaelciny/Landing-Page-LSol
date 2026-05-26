@@ -12,17 +12,33 @@ const WhatsAppFloat = dynamic(
   () => import("@/components/Contact/WhatsAppButton")
 );
 
+// Metadata especifica para la pagina de productos
 export const metadata: Metadata = {
-  title: `Productos | ${siteData.siteName}`,
+  title: "Catálogo de Productos por Sector Industrial",
   description:
-    "Catálogo completo de materias primas e insumos químicos por sector industrial. Encuentre el producto que necesita para su industria.",
+    "Catálogo completo de materias primas e insumos químicos por sector industrial: curtidora, plastificantes, alimenticio, tratamiento de aguas, textil y más. Encuentra el producto que necesita tu industria.",
   keywords: [
-    "productos químicos",
-    "materias primas",
-    "insumos industriales",
-    "catálogo",
-    "LSol",
+    "catálogo productos químicos",
+    "materias primas industriales",
+    "insumos químicos México",
+    "carbonato de sodio",
+    "ácido cítrico",
+    "sulfato de aluminio",
+    "acetona industrial",
+    "tolueno",
+    "glicerina",
+    "industria curtidora químicos",
+    "tratamiento de aguas productos",
   ],
+  alternates: {
+    canonical: "/productos",
+  },
+  openGraph: {
+    title: `Catálogo de Productos | ${siteData.siteName}`,
+    description:
+      "Explore nuestro portafolio completo de materias primas e insumos químicos organizados por sector industrial.",
+    url: "/productos",
+  },
 };
 
 export default function ProductosPage() {
