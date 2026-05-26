@@ -2,16 +2,16 @@
 // Aqui se modifican textos, imagenes y contenido sin tocar los componentes
 
 import { StaticImageData } from "next/image";
-import logo from "@/assets/Logo/Logo-LSol.png";  // Imagen del logo de LSol
-import logoWhite from "@/assets/Logo/Logo-Lsol-Blanco.png";  // Imagen del logo de LSol
-import banner1 from "@/assets/Banners/Banner-1.jpeg";  // Imagen del primer banner
-import banner2 from "@/assets/Banners/Banner-2.jpeg";  // Imagen del segundo banner
-import banner3 from "@/assets/Banners/Banner-3.jpeg";  // Imagen del tercer banner
-import about from "@/assets/About/Imagen-LSol.png"; // Imagen de sobre nostros
-import sector1 from "@/assets/Sectores/Industria-Curtidora.png";
-import sector2 from "@/assets/Sectores/Plastificantes.png";
-import sector3 from "@/assets/Sectores/Sector-alimenticio.png";
-import sector4 from "@/assets/Sectores/Tratamiento-agua.png";
+import logo from "@/assets/Logo/Logo-LSol.webp";  // Imagen del logo de LSol
+import logoWhite from "@/assets/Logo/Logo-Lsol-Blanco.webp";  // Imagen del logo de LSol
+import banner1 from "@/assets/Banners/Banner-1.webp";  // Imagen del primer banner
+import banner2 from "@/assets/Banners/Banner-2.webp";  // Imagen del segundo banner
+import banner3 from "@/assets/Banners/Banner-3.webp";  // Imagen del tercer banner
+import about from "@/assets/About/Imagen-LSol.webp"; // Imagen de sobre nostros
+import sector1 from "@/assets/Sectores/Industria-Curtidora.webp";
+import sector2 from "@/assets/Sectores/Plastificantes.webp";
+import sector3 from "@/assets/Sectores/Sector-alimenticio.webp";
+import sector4 from "@/assets/Sectores/Tratamiento-agua.webp";
 
 // Definicion de tipos para TypeScript - Ayuda a mantener el codigo ordenado
 // Cada interfaz define la estructura de una seccion especifica
@@ -58,6 +58,7 @@ export interface Sector {
   description: string;     // Que insumos se les provee
   image?: StaticImageData; // Imagen (opcional, para sectores principales)
   isMain?: boolean;        // true = se muestra grande arriba, false = icono pequeno
+  products?: string[];     // Lista de productos que se ofrecen
 }
 
 export interface AboutSection {
@@ -69,6 +70,9 @@ export interface AboutSection {
 }
 
 export interface ContactInfo {
+  title: string;
+  subtitle: string;
+  infoTitle: string;
   email: string;      // Correo electronico de contacto
   phone: string;      // Telefono de la empresa
   address: string;    // Direccion fisica
@@ -108,28 +112,28 @@ export const siteData: SiteData = {
     "Suministro estratégico de materias primas e insumos químicos para la industria. Importación y distribución con respaldo global.",
   // Banners del carrusel principal - 3 imagenes con texto
   banners: [
-  {
-    id: 1,
-    title: "LSol Comercializadora Internacional",
-    subtitle:
-      "Suministro estratégico de materias primas e insumos químicos para la industria.",
-    image: banner1,
-  },
-  {
-    id: 2,
-    title: "Continuidad en su cadena de producción",
-    subtitle:
-      "Abastecimiento eficaz con soluciones logísticas a la medida de su empresa.",
-    image: banner2,
-  },
-  {
-    id: 3,
-    title: "Calidad que trasciende fronteras",
-    subtitle:
-      "Importación y distribución con respaldo global y atención personalizada.",
-    image: banner3,
-  },
-],
+    {
+      id: 1,
+      title: "LSol Comercializadora Internacional",
+      subtitle:
+        "Suministro estratégico de materias primas e insumos químicos para la industria.",
+      image: banner1,
+    },
+    {
+      id: 2,
+      title: "Continuidad en su cadena de producción",
+      subtitle:
+        "Abastecimiento eficaz con soluciones logísticas a la medida de su empresa.",
+      image: banner2,
+    },
+    {
+      id: 3,
+      title: "Calidad que trasciende fronteras",
+      subtitle:
+        "Importación y distribución con respaldo global y atención personalizada.",
+      image: banner3,
+    },
+  ],
   // 3 distintivos que aparecen debajo del carrusel
   distinctives: [
     {
@@ -219,49 +223,124 @@ export const siteData: SiteData = {
       id: 1,
       name: "Industria Curtidora",
       description: "Especialidades químicas para el proceso de cuero.",
-      image : sector1,
+      image: sector1,
       isMain: true,
+      products: [
+        "CARBONATO DE SODIO LIGERO",
+        "SULFHIDRATO DE SODIO 70% ESCAMAS",
+        "SULFURO DE SODIO 60-66% ESCAMAS",
+        "METABISULFITO DE SODIO ANHIDRO",
+        "BICARBONATO DE AMONIO",
+        "SAL LAVADA",
+        "SAL MOLIDA",
+        "SAL ISYSA",
+        "EDTA (SECUESTRANTE) TETRASÓDICO",
+        "FORMIATO DE SODIO",
+        "CAL (INDUSTRIAL Y ALIMENTICIA)",
+      ],
     },
     {
       id: 2,
-      name: "Plastificantes",
-      description: "Insumos para la transformación de polímeros.",
-      image : sector2,
+      name: "Plastificantes / Solventes",
+      description: "Insumos para la transformación de polímeros y solventes industriales.",
+      image: sector2,
       isMain: true,
+      products: [
+        "ACETONA",
+        "TOLUENO",
+        "MEK",
+        "IPA",
+        "ALC ETILICO",
+        "ALC BENCÍLICO",
+        "ALC METILICO",
+        "ALC CETILICO",
+        "ALC N-BUTÍLICO",
+        "ALC LÁURICO",
+        "XILOL",
+        "THINNER NAC",
+        "THINER IMPORTADO",
+      ],
     },
     {
       id: 3,
       name: "Sector Alimenticio",
       description: "Materias primas de grado alimenticio certificadas.",
-      image : sector3,
+      image: sector3,
       isMain: true,
+      products: [
+        "ÁCIDO CÍTRICO",
+        "ÁCIDO TARTÁRICO",
+        "ÁCIDO ASCÓRBICO",
+        "BENZOATO DE SODIO",
+        "FÉCULA DE MAÍZ",
+        "ALMIDÓN DE MAÍZ NATIVO",
+        "MALTODEXTRINA",
+        "GOMA XANTANA",
+        "ÁCIDO ACÉTICO GLACIAL",
+        "BICARBONATO DE SODIO",
+        "CITRATO DE SODIO",
+        "CLORURO DE CALCIO",
+      ],
     },
     {
       id: 4,
       name: "Tratamiento de Aguas",
       description: "Soluciones para purificación y manejo de efluentes.",
-      image : sector4,
+      image: sector4,
       isMain: true,
+      products: [
+        "SULFATO DE ALUMINIO",
+        "SULFATO FÉRRICO",
+        "BISULFITO DE SODIO",
+        "HIDRÓXIDO DE CALCIO",
+      ],
     },
     {
       id: 5,
       name: "Industria Hulera",
       description: "Compuestos para la producción de caucho.",
+      products: [
+        "CAOLÍN INDUSTRIAL",
+        "ÁCIDO ESTEÁRICO",
+      ],
     },
     {
       id: 6,
       name: "Detergentes y Cuidado del Hogar",
       description: "Tensoactivos e insumos de limpieza.",
+      products: [
+        "LAURIL",
+        "GLICERINA",
+        "CARBONATO DE SODIO DENSO",
+        "EDTA (SECUESTRANTE) DISÓDICO",
+        "EDTA (SECUESTRANTE)",
+        "GLUCONATO DE SODIO",
+      ],
     },
     {
       id: 7,
       name: "Cosmética",
       description: "Materias primas para cuidado personal y belleza.",
+      products: [
+        "LAURIL",
+        "GLICERINA",
+        "CARBONATO DE SODIO DENSO",
+        "EDTA (SECUESTRANTE) DISÓDICO",
+        "EDTA (SECUESTRANTE)",
+        "GLUCONATO DE SODIO",
+      ],
     },
     {
       id: 8,
       name: "Industria Textil",
       description: "Químicos para procesamiento y acabado de fibras.",
+      products: [
+        "CLORURO DE SODIO",
+        "SILICATO DE SODIO",
+        "BOROHIDRURO DE SODIO",
+        "COLORANTES",
+        "LESS",
+      ],
     },
     {
       id: 9,
@@ -272,6 +351,15 @@ export const siteData: SiteData = {
       id: 10,
       name: "Químicos Especializados",
       description: "Portafolio diverso para necesidades técnicas específicas.",
+      products: [
+        "ÁCIDO MURIÁTICO",
+        "ÁCIDO CLORHÍDRICO",
+        "ÁCIDO SULFÚRICO",
+        "ÁCIDO FÓRMICO",
+        "PERÓXIDO DE HIDRÓGENO",
+        "DIETILENGLICOL",
+        "PROPILENGLICOL",
+      ],
     },
   ],
   // Valores filosoficos de la empresa
@@ -299,12 +387,15 @@ export const siteData: SiteData = {
   ],
   // Informacion de contacto - IMPORTANTE: Reemplaza los placeholders [Insertar...]
   contact: {
-    email: "ejemplo@ghmail.com",
-    phone: "477 123 45 56",
-    address: "Hey Hey Studio blvd",
+    title: "Contacto",
+    subtitle: "Estamos listos para atender sus requerimientos industriales",
+    infoTitle: "Información de Contacto",
+    email: "ventas@lsolgoblal.com.mx",
+    phone: "479 428 87 04",
+    address: "Blvd. Brisa de Sarandí 315, 37669 León de los Aldama, Gto.",
     mapUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14884.797727549842!2d-101.68172928488534!3d21.14446021083814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbd8cc3628643%3A0x7097d5194b2586a8!2sHey%20Hey%20Studio%20-%20Agencia%20de%20Marketing%20Digital%20en%20Le%C3%B3n.!5e0!3m2!1ses-419!2smx!4v1778192066220!5m2!1ses-419!2smx",
-    whatsapp: "https://api.whatsapp.com/send?phone=52[12324324232423]",
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.390133063356!2d-101.7658604883323!3d21.17665548042865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bc6dcb105c5c7%3A0x752b84dba73e2af4!2sBlvd.%20Brisa%20de%20Sarand%C3%AD%20315%2C%2037669%20Le%C3%B3n%20de%20los%20Aldama%2C%20Gto.!5e0!3m2!1ses-419!2smx!4v1779818585533!5m2!1ses-419!2smx',
+    whatsapp: "https://api.whatsapp.com/send?phone=524794288704",
   },
-  
+
 };

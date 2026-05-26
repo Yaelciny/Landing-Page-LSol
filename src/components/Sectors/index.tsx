@@ -6,25 +6,19 @@
 import { siteData } from "@/data/nat";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import {  // Iconos para los sectores secundarios
-  Droplets,        // Curtidora
-  Flame,           // Plastificantes
-  UtensilsCrossed, // Alimenticio
-  Waves,           // Tratamiento de Aguas
-  CircleDot,       // Hulera
-  Sparkles,        // Detergentes
-  Palette,         // Cosmetica
-  Shirt,           // Textil
-  ScrollText,      // Papel
-  FlaskConical,    // Quimicos Especializados
+import Link from "next/link";
+import {
+  CircleDot,
+  Sparkles,
+  Palette,
+  Shirt,
+  ScrollText,
+  FlaskConical,
+  ArrowRight,
 } from "lucide-react";
 
 // Mapa de iconos para sectores secundarios (los que no son isMain)
 const iconMap: Record<number, React.ElementType> = {
-  1: Droplets,
-  2: Flame,
-  3: UtensilsCrossed,
-  4: Waves,
   5: CircleDot,
   6: Sparkles,
   7: Palette,
@@ -76,6 +70,7 @@ export default function Sectors() {
                     src={sector.image}
                     alt={sector.name}
                     fill
+                    loading="eager"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 ) : (
@@ -84,9 +79,19 @@ export default function Sectors() {
                   </div>
                 )}
                 {/* Overlay oscuro degradado para legibilidad del texto */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="text-white font-semibold text-lg">{sector.name}</h3>
+                  {/* Boton Ver mas que aparece con hover */}
+                  {sector.products && sector.products.length > 0 && (
+                    <Link
+                      href={`/productos#sector-${sector.id}`}
+                      className="inline-flex items-center gap-1.5 mt-2 text-xs font-medium text-white/80 hover:text-primary transition-colors group/link"
+                    >
+                      Ver productos
+                      <ArrowRight className="size-3 group-hover/link:translate-x-0.5 transition-transform" />
+                    </Link>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -116,9 +121,19 @@ export default function Sectors() {
                   <h3 className="text-sm font-semibold text-foreground mb-2">
                     {sector.name}
                   </h3>
-                  <p className="text-xs text-muted-foreground hidden md:block">
+                  <p className="text-xs text-muted-foreground hidden md:block mb-3">
                     {sector.description}
                   </p>
+                  {/* Boton Ver mas para sectores secundarios */}
+                  {sector.products && sector.products.length > 0 && (
+                    <Link
+                      href={`/productos#sector-${sector.id}`}
+                      className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:text-primary/80 transition-colors group/link"
+                    >
+                      Ver más
+                      <ArrowRight className="size-3 group-hover/link:translate-x-0.5 transition-transform" />
+                    </Link>
+                  )}
                 </div>
               </motion.div>
             );

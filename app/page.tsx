@@ -12,7 +12,7 @@ const Logistics = dynamic(() => import("@/components/Logistics"));  // Seccion d
 const Sectors = dynamic(() => import("@/components/Sectors"));      // Seccion de Industrias y Sectores
 const Contact = dynamic(() => import("@/components/Contact"));      // Seccion de Contacto con formulario
 const Footer = dynamic(() => import("@/components/Footer"));        // Pie de pagina
-const WhatsAppButton = dynamic(() => import("@/components/Contact/WhatsAppButton")); // Boton flotante de WhatsApp
+const WhatsAppFloat = dynamic(() => import("@/components/Contact/WhatsAppButton")); // Boton flotante de WhatsApp
 
 // Configuracion de metadatos SEO para la pagina principal
 // Esto ayuda a los buscadores a entender de que trata el sitio
@@ -72,7 +72,7 @@ export default function Home() {
         <Contact />    {/* Seccion 5: Formulario de contacto e informacion */}
       </main>
       <Footer />       {/* Pie de pagina con enlaces e info de contacto */}
-      <WhatsAppButton /> {/* Boton flotante que aparece al hacer scroll */}
+      <WhatsAppFloat /> {/* Boton flotante que aparece al hacer scroll */}
     </>
   );
 }

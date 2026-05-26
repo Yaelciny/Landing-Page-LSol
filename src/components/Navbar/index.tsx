@@ -4,11 +4,13 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteData } from "@/data/nat";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";  // Iconos para menu hamburguesa
 import Image from "next/image";
+import Link from "next/link";
 
 // Enlaces de navegacion - Al hacer clic se hace scroll suave a la seccion
 const navLinks = [
@@ -21,12 +23,22 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);  // Estado para menu movil
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  // Obtener el href correcto segun la pagina actual
+  const getHref = (hash: string) => {
+    return isHome ? hash : `/${hash}`;
+  };
 
   // Funcion para navegar a una seccion y cerrar el menu movil
   const handleNav = (href: string) => {
     setOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
+    if (isHome) {
+      const el = document.querySelector(href);
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
+    // Si no estamos en home, el Link component de Next.js se encarga de la navegacion
   };
 
   return (
@@ -40,9 +52,9 @@ export default function Navbar() {
       >
         <div className="container">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo de la empresa - Solo muestra la primera palabra "LSol" con gradiente */}
-            <motion.a
-              href="#inicio"
+            {/* Logo de la empresa */}
+            <Link
+              href="/"
               className="text-2xl font-bold text-foreground font-sora"
             >
               <Image
@@ -51,35 +63,60 @@ export default function Navbar() {
                 className="object-contain w-auto h-8 md:h-10" // Mantiene proporciones. h-8 en móvil, h-10 en PC.
                 priority
               />
-            </motion.a>
+            </Link>
 
             {/* Navegacion de escritorio - Oculta en movil */}
             <nav className="hidden lg:flex items-center gap-8">
               {navLinks.map((item, index) => (
-                <motion.a
+                <motion.div
                   key={item.href}
-                  href={item.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}  // Animacion escalonada
+                  transition={{ delay: index * 0.1 }}
                 >
-                  {item.label}
-                  {/* Linea inferior que aparece al pasar el mouse */}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-                </motion.a>
+                  {isHome ? (
+                    <a
+                      href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNav(item.href);
+                      }}
+                      className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
+                    >
+                      {item.label}
+                      {/* Linea inferior que aparece al pasar el mouse */}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                    </a>
+                  ) : (
+                    <Link
+                      href={getHref(item.href)}
+                      className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
+                    >
+                      {item.label}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                    </Link>
+                  )}
+                </motion.div>
               ))}
             </nav>
 
             <div className="flex items-center gap-4">
               {/* Boton de cotizar - Solo visible en escritorio */}
-              <Button
-                variant="default"
-                className="hidden lg:flex"
-                onClick={() => handleNav("#contacto")}
-              >
-                Cotizar ahora
-              </Button>
+              {isHome ? (
+                <Button
+                  variant="default"
+                  className="hidden lg:flex"
+                  onClick={() => handleNav("#contacto")}
+                >
+                  Cotizar ahora
+                </Button>
+              ) : (
+                <Link href="/#contacto" className="hidden lg:flex">
+                  <Button variant="default">
+                    Cotizar ahora
+                  </Button>
+                </Link>
+              )}
 
               {/* Boton de menu hamburguesa - Solo visible en movil */}
               <Button
@@ -104,16 +141,30 @@ export default function Navbar() {
               className="lg:hidden bg-card border-t border-border overflow-hidden"
             >
               <nav className="container px-4 py-4 flex flex-col gap-2">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => handleNav(link.href)}
-                    className="py-3 px-4 text-foreground hover:bg-muted rounded-lg transition-colors text-left"
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                {navLinks.map((link) =>
+                  isHome ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNav(link.href);
+                      }}
+                      className="py-3 px-4 text-foreground hover:bg-muted rounded-lg transition-colors text-left"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={getHref(link.href)}
+                      onClick={() => setOpen(false)}
+                      className="py-3 px-4 text-foreground hover:bg-muted rounded-lg transition-colors text-left"
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
               </nav>
             </motion.div>
           )}

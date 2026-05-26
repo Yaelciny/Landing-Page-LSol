@@ -29,7 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="es"  // Idioma del sitio
+      lang="es"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
