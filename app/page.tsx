@@ -13,6 +13,7 @@ const Sectors = dynamic(() => import("@/components/Sectors"));      // Seccion d
 const Contact = dynamic(() => import("@/components/Contact"));      // Seccion de Contacto con formulario
 const Footer = dynamic(() => import("@/components/Footer"));        // Pie de pagina
 const WhatsAppFloat = dynamic(() => import("@/components/Contact/WhatsAppButton")); // Boton flotante de WhatsApp
+const PhoneFloat = dynamic(() => import("@/components/Contact/PhoneButton")); // Boton flotante de llamada (solo movil)
 
 // Metadata especifica de la pagina de inicio
 // Se combina con el metadata global del layout
@@ -40,6 +41,7 @@ export default function Home() {
       </main>
       <Footer />       {/* Pie de pagina con enlaces e info de contacto */}
       <WhatsAppFloat /> {/* Boton flotante que aparece al hacer scroll */}
+      <PhoneFloat /> {/* Boton flotante de llamada (solo en movil) */}
     </>
   );
 }

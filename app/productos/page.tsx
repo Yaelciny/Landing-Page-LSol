@@ -11,6 +11,9 @@ const Footer = dynamic(() => import("@/components/Footer"));
 const WhatsAppFloat = dynamic(
   () => import("@/components/Contact/WhatsAppButton")
 );
+const PhoneFloat = dynamic(
+  () => import("@/components/Contact/PhoneButton")
+);
 
 // Metadata especifica para la pagina de productos
 export const metadata: Metadata = {
@@ -50,6 +53,7 @@ export default function ProductosPage() {
       </main>
       <Footer />
       <WhatsAppFloat />
+      <PhoneFloat />
     </>
   );
 }

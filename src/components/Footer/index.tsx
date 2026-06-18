@@ -124,7 +124,7 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Contacto</h4>
             <div className="space-y-3 text-sm text-background/70">
               <div className="flex items-center gap-2">
-                <MapPin className="size-4 text-primary" />
+                <MapPin className="size-7 text-primary" />
                 <p>{siteData.contact.address}</p>
               </div>
               <div className="flex items-center gap-2">
