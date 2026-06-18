@@ -20,7 +20,7 @@ export default function WhatsAppFloat() {
 
   // Construir la URL de WhatsApp con mensaje predefinido
   const phone = siteData.contact.phone.replace(/\D/g, "");
-  const whatsappUrl = `https://wa.me/52${phone}?text=${encodeURIComponent("Hola, me gustaría cotizar un producto químico.")}`;
+  const whatsappUrl = `https://wa.me/52${phone}?text=${encodeURIComponent("Hola, me gustaría cotizar materias primas e insumos químicos.")}`;
 
   return (
     <AnimatePresence>
